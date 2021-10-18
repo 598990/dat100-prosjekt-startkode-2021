@@ -29,8 +29,11 @@ public class Spill {
 	public Spill() {
 		
 		// TODO - START
+		bord = new Bord();
+		syd = new SydSpiller(Spillere.SYD);
+		nord = new SydSpiller(Spillere.NORD);
 		
-		throw new UnsupportedOperationException(TODO.constructor("Spill"));
+		//throw new UnsupportedOperationException(TODO.constructor("Spill"));
 		// TODO - END
 		
 	}
@@ -43,8 +46,9 @@ public class Spill {
 	public Bord getBord() {
 		
 		// TODO - START
+		return bord;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 		
@@ -58,8 +62,9 @@ public class Spill {
 	public ISpiller getSyd() {
 		
 		// TODO - START
+		return syd;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 		
@@ -73,8 +78,9 @@ public class Spill {
 	public ISpiller getNord() {
 		
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+		return nord;
+		
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 	}
@@ -91,8 +97,16 @@ public class Spill {
 	public void start() {
 		
 		// TODO - START
+		nord = new NordSpiller(Spillere.NORD);
+		syd = new SydSpiller(Spillere.SYD);
+		bord = new Bord();
+		KortSamling bunkeFra = bord.getBunkeFra();
+		bunkeFra.leggTilAlle();
+		KortUtils.stokk(bunkeFra);
+		delutKort();
+		bord.vendOversteFraBunke();
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 	}
 
@@ -103,8 +117,14 @@ public class Spill {
 	private void delutKort() {
 
 		// TODO - START
+		KortSamling nordHand = nord.getHand();
+		KortSamling sydHand = syd.getHand();
+		for(int i = 0; i < ANTALL_KORT_START; i++) {
+			nordHand.leggTil(bord.getBunkeFra().taSiste());
+			sydHand.leggTil(bord.getBunkeFra().taSiste());
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 	}
 
@@ -121,8 +141,12 @@ public class Spill {
 	public Kort trekkFraBunke(ISpiller spiller) {
 
 		// TODO - START
+		Kort kort = bord.getBunkeFra().taSiste();
+		spiller.leggTilKort(kort);
+		spiller.setAntallTrekk(spiller.getAntallTrekk()+1);
+		return kort;
 			
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 	}
@@ -139,6 +163,8 @@ public class Spill {
 		
 		// TODO - START
 		// Hint: se på hvilke metoder som er tilgjengelig på en spiller
+		
+		
 		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
@@ -160,8 +186,19 @@ public class Spill {
 	public boolean leggnedKort(ISpiller spiller, Kort kort) {
 		
 		// TODO - START
+		for(Kort kortHand : spiller.getHand().getSamling()) {
+			if(kortHand == kort) {
+				KortSamling hand = spiller.getHand();
+				hand.fjern(kort);
+				bord.getBunkeTil().leggTil(kort);
+				spiller.setAntallTrekk(spiller.getAntallTrekk()+1);
+				return true;
+			}
+		}
+		return false;
+			
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 	}
@@ -177,7 +214,8 @@ public class Spill {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		
+		//throw new UnsupportedOperationException(TODO.method());
 	
 		// TODO - END
 	}

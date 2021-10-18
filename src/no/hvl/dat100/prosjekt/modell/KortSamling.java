@@ -22,10 +22,13 @@ public class KortSamling {
 	 */
 	public KortSamling() {
 		
-		// TODO - START
+		//TODO - START
+		samling = new Kort[MAKS_KORT];
+		antall = 0;
 		
-		throw new UnsupportedOperationException(TODO.constructor("KortSamling"));
-		// TODO - END
+		//throw new UnsupportedOperationException(TODO.constructor("KortSamling"));
+		
+		//TODO - END
 	}
 
 	/**
@@ -51,8 +54,9 @@ public class KortSamling {
 	public int getAntalKort() {
 		
 		// TODO - START
+		return antall;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - END
 	}
@@ -65,8 +69,14 @@ public class KortSamling {
 	public boolean erTom() {
 		
 		// TODO - START
+		if(antall == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 				
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - END
 	}
@@ -80,8 +90,10 @@ public class KortSamling {
 	public void leggTil(Kort kort) {
 		
 		// TODO - START
+		samling[antall] = new Kort(kort.getFarge(), kort.getVerdi());
+		antall++;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 		
 	}
@@ -94,8 +106,14 @@ public class KortSamling {
 		
 		// TODO - START
 		// Husk: bruk Regler.MAKS_KORT_FARGE for å få antall kort per farge
+		antall=0;
+		for(Kortfarge farge : Kortfarge.values()) {
+			for(int i = 1; i <= Regler.MAKS_KORT_FARGE; i++) {
+				leggTil(new Kort(farge, i));
+			}
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 	}
 
@@ -105,8 +123,10 @@ public class KortSamling {
 	public void fjernAlle() {
 		
 		// TODO - START
+		samling = new Kort[MAKS_KORT];
+		antall = 0;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 	}
 	
@@ -119,8 +139,13 @@ public class KortSamling {
 	public Kort seSiste() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		if(antall == 0) {
+			return null;
+		}
+		else {
+			return samling[antall-1];
+		}
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 		
@@ -132,11 +157,19 @@ public class KortSamling {
 	 * @return siste kortet i samlinga. Dersom samalinga er tom, returneres
 	 *         null.
 	 */
-	public Kort taSiste() {
+	 public Kort taSiste() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		if(antall == 0) {
+			return null;
+		}
+		else {
+			Kort sisteKort = samling[antall-1];
+			fjern(sisteKort);
+			return sisteKort;
+		} 
+		 
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - END
 	}
@@ -151,9 +184,14 @@ public class KortSamling {
 	public boolean har(Kort kort) {
 		
 		// TODO - START
+		for(int i = 0; i < antall; i++) {
+			if(samling[i].equals(kort)) {
+				return true;
+			}
+		}
+		return false;
 		
-		throw new UnsupportedOperationException(TODO.method());
-		// return false;
+		//throw new UnsupportedOperationException(TODO.method());
 		// TODO - END
 		
 	}
@@ -171,8 +209,23 @@ public class KortSamling {
 	public boolean fjern(Kort kort) {
 		
 		// TODO - START
+		Kort[] nySamling = new Kort[samling.length];
+		int nyAntall = 0;
+		boolean funnet = false;
+		for(int i = 0; i < antall; i++) {
+			if(samling[i].equals(kort)) {
+				funnet = true;
+			}
+			else {
+				nySamling[nyAntall] = samling[i];
+				nyAntall++;
+			}
+		}
+		antall = nyAntall;
+		samling = nySamling;
+		return funnet;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 	}
@@ -186,8 +239,13 @@ public class KortSamling {
 	public Kort[] getAllekort() {
 		
 		// TODO - START
+		Kort[] nySamling = new Kort[antall];
+		for(int i = 0; i < antall; i++) {
+			nySamling[i] = samling[i];
+		}
+		return nySamling;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - END
 	
