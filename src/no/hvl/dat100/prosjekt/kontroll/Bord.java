@@ -182,13 +182,11 @@ public class Bord {
 
 		// TODO - START
 		Kort kort = seOversteBunkeTil();
-		Kort[] bunkeTilSamling = bunkeTil.getSamling();
-		int antallTil = bunkeTil.getAntalKort();
-		for(int i = 0; i < antallTil; i++) {
-			bunkeFra.leggTil(bunkeTilSamling[i]);
-		}
+		bunkeFra = bunkeTil;
+		bunkeFra.fjern(kort);
 		KortUtils.stokk(bunkeFra);
-		bunkeTil.fjernAlle();
+		
+		bunkeTil = new KortSamling();
 		bunkeTil.leggTil(kort);
 		
 		//throw new UnsupportedOperationException(TODO.method());

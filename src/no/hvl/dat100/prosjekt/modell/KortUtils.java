@@ -60,10 +60,11 @@ public class KortUtils {
 		
 		// TODO - START
 		Kort[] nySamling = samling.getSamling();
+		Random tall = new Random();
 		int antall = samling.getAntalKort();
 		for(int i = 0; i < antall; i++) {
+			int index = tall.nextInt(i+1);
 			Kort kort1 = nySamling[i];
-			int index = (int)Math.random()*antall;
 			Kort kort2 = nySamling[index];
 			nySamling[i] = kort2;
 			nySamling[index] = kort1;
