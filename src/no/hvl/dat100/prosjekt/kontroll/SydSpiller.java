@@ -74,13 +74,13 @@ public class SydSpiller extends Spiller {
 			int p = r.nextInt(spillFra.length);
 			spill = spillFra[p];
 			handling = new Handling(HandlingsType.LEGGNED, spill);
-			// setAntallTrekk(0);
+			setAntallTrekk(0);
 			
 		} else if (getAntallTrekk() < Regler.maksTrekk()) {
 			handling = new Handling(HandlingsType.TREKK, null);
 		} else {
 			handling = new Handling(HandlingsType.FORBI, null);
-			// setAntallTrekk(0);
+			setAntallTrekk(0);
 		}
 
 		return handling;
